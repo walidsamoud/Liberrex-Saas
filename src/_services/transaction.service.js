@@ -1,0 +1,52 @@
+import { authHeader, ApiConfigs } from '../_helpers';
+
+export const transactionService = {
+    getAllByBooking,
+    delete: _delete,
+    create,
+    
+};
+
+function getAllByBooking(id) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch(`${ApiConfigs.base_url+ApiConfigs.bookingTransactions.getAllByBooking.replace(':id', id)}`, requestOptions).then(handleResponse);
+}
+
+function create(obj) {
+    const requestOptions = {
+        method: 'POST',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' },
+        body : JSON.stringify(obj),
+    };
+
+    return fetch(`${ApiConfigs.base_url+ApiConfigs.bookingTransactions.create}`, requestOptions).then(handleResponse);
+}
+
+// prefixed function name with underscore because delete is a reserved word in javascript
+function _delete(id) {
+    const requestOptions = {
+        method: 'DELETE',
+        headers: authHeader()
+    };
+
+    return fetch(`${ApiConfigs.base_url+ApiConfigs.bookingTransactions._delete.replace(':id', id)}`, requestOptions).then(handleResponse);
+}
+
+function handleResponse(response) {
+    return response.text().then(text => {
+        const data = JSON.parse(text);
+        if (!response.ok) {
+            if (response.status === 401) { localStorage.removeItem('user');
+                // auto logout if 401 response returned from api
+                /*location.reload(true);*/window.location.href = '/login';
+            }
+
+            const error = (data && data.message) || response.statusText;
+            return Promise.reject(error);
+        }
+        return data;
+    });
+}

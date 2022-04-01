@@ -1,0 +1,65 @@
+.customizer-panel .vs-sidebar {
+	padding: 5px 15px 15px;
+	max-width: 50vw;
+	overflow-y: auto;
+}
+
+@media only screen and (max-width: 950px){
+	.customizer-panel .vs-sidebar {
+		max-width: 100vw !important;
+	}
+	.outside{
+		display: none !important;
+	}
+	.vs-col{
+		margin-bottom: 10px;
+	}
+}
+
+body .btn-customizer {
+	position: fixed;
+	top: 50%;
+	right: -1px;
+	height: 48px;
+	z-index: 10;
+	padding: 12px 15px;
+	border-radius: 60px 0 0 60px;
+}
+.vs-select--options{
+	z-index:40001;
+}
+.vs-select-primary{
+	z-index:40001;
+}
+.customizer-list {
+	li {
+		width: 20px;
+		height: 20px;
+		border-radius: 100%;
+		overflow-y: hidden;
+		margin: 5px 5px;
+		border: 1px solid rgba(0, 0, 0, 0.2);
+		cursor: pointer;
+		
+	}
+}
+
+.inservice {
+	background: linear-gradient(90deg, #3aa6fe 0%, #49deff 100%) !important;
+	color: #fff !important;
+}
+
+.urgent {
+	background: linear-gradient(90deg, #fe1205 0%, #ba3019 100%) !important;
+	color: #fff !important;
+}
+
+.lg-modal > .vs-dialog {
+	max-width: 550px !important;
+	width: 550px;
+
+	.con-select {
+		width: 100px;
+		clear: both;
+	}
+}
